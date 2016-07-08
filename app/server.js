@@ -1,3 +1,4 @@
+/* Manmeet Gujral, CS 52, HW 2 */
 import botkit from 'botkit';
 // this is es6 syntax for importing libraries
 // in older js this would be: var botkit = require('botkit')
@@ -27,7 +28,17 @@ controller.setupWebserver(process.env.PORT || 3001, (err, webserver) => {
   });
 });
 
-// example hello response
-controller.hears(['hello', 'hi', 'howdy'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
-  bot.reply(message, 'Hello there!');
+// Hello response given by Tim T
+controller.hears(['hello', 'hi', 'howdy', 'hey'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+  bot.api.users.info({ user: message.user }, (err, res) => {
+    if (res) {
+      bot.reply(message, `Hello, ${res.user.name}!`);
+    } else {
+      bot.reply(message, 'Hello there!');
+    }
+  });
+});
+
+controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+  bot.reply(message, 'Looks like you want some food!');
 });
