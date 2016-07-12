@@ -1,4 +1,6 @@
-//* Manmeet Gujral, CS 52, HW 2 */
+/* Manmeet Gujral, CS 52, HW 2 */
+/* Heavily used the documentation for botkit, yelp api, and discussed
+   with Alex Beals and Rajiv Ramaiah */
 
 import botkit from 'botkit';
 import Yelp from 'yelp';
@@ -20,9 +22,9 @@ const slackbot = controller.spawn({
 // Include the yelp API
 const yelpControl = new Yelp({
   consumer_key: 'oI0IJ6CHB8XqZ15klhYacA',
-  consumer_secret: 'WEleJgUR7P5LhPbWHRFb9Bb8DXM',
+  consumer_secret: process.env.consumer_secret,
   token: 'KVDbQ7JdE97FCIgevYp_gYuJt7MUhoPv',
-  token_secret: '8zAqYuVckws4oBujGmbXKfiBT5s',
+  token_secret: process.env.token_secret,
 });
 
 // prepare webhook
@@ -38,9 +40,23 @@ controller.on('outgoing_webhook', (bot, message) => {
   bot.replyPublic(message, 'Hey! I\'m up! I\'m up! http://gifrific.com/wp-content/uploads/2012/10/Bunny-running-around-on-bed.gif');
 });
 
-controller.hears(['whats up?'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+
+// Handle all other messages
+controller.hears(['^((?!help|food|whats up).)*$'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
   // Use ask and callback to code in simple conversation
   bot.reply(message, 'Oh, ya know, just robot things.');
+});
+
+// Handle the whats up? message
+controller.hears(['whats up'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+  // Use ask and callback to code in simple conversation
+  bot.reply(message, 'Oh, ya know, just robot things.');
+});
+
+// Handle the help message
+controller.hears(['help'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+  // Use ask and callback to code in simple conversation
+  bot.reply(message, 'You can say hi to me, ask me for food by using the word food, or ask me \'whats up?\'');
 });
 
 // Hello response given by Tim T
