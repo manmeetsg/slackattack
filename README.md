@@ -3,6 +3,11 @@
 ##GIT HUB REPO: 
 https://github.com/manmeetsg/slackattack
 
+##HEROKU URL:
+manmeetslackattack.herokuapp.com
+https://git.heroku.com/manmeetslackattack.git
+
+
 ##NOTES: 
 - Please see the screenshots folder for my screenshots of the bot
 - My bot replies to hi, hello, howdy, and hey as greetings __ONLY__ if they are the first thing in the message, otherwise it replies wondering what you said
