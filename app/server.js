@@ -34,8 +34,8 @@ controller.setupWebserver(process.env.PORT || 3001, (err, webserver) => {
 });
 
 // Wake up message
-controller.hears(['wake up'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
-  bot.reply(message, 'Hey! I\'m up! I\'m up! http://gifrific.com/wp-content/uploads/2012/10/Bunny-running-around-on-bed.gif');
+controller.on('outgoing_webhook', (bot, message) => {
+  bot.replyPublic(message, 'Hey! I\'m up! I\'m up! http://gifrific.com/wp-content/uploads/2012/10/Bunny-running-around-on-bed.gif');
 });
 
 controller.hears(['whats up?'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
@@ -101,9 +101,6 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'], (bot
 
   // Now ask for location
   const locationQuery = (res, con) => {
-    // con.ask('Would you like some food recommendations?', (response, convo) => {
-    //   // Ask if they want food or not, if so, continue, if not, return entirely
-    // });
     con.ask('Where are you located?', (response, convo) => {
       con.say('Great!');
       foodQuery(response, convo, response.text);
@@ -124,6 +121,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'], (bot
         },
       },
       {
+        pattern: bot.utterances.no,
         callback: (response, convo) => {
           convo.say('Ok, then I won\'t show you any results');
           convo.next();
