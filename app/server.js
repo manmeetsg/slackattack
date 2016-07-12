@@ -102,6 +102,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
       ],
       text: `${resultList[0].name}'s Rating: ${resultList[0].rating}`,
     });
+    con.next();
   };
 
   const yelpQuery = (res, con, food, loc) => {
