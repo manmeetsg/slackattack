@@ -94,15 +94,30 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
       con.next();
       con.say('Here is your top result: ');
       con.next();
+      con.say(`Rating: ${resultList[0].rating} / 5`);
       con.say({
         attachments: [
           {
             title: `${resultList[0].name}`,
+          },
+        ],
+      });
+      con.next();
+      con.say({
+        attachments: [
+          {
             image_url: resultList[0].image_url,
-            text: resultList[0].snippet_text,
           },
         ],
         text: `${resultList[0].name}'s Rating: ${resultList[0].rating}`,
+      });
+      con.next();
+      con.say({
+        attachments: [
+          {
+            text: resultList[0].snippet_text,
+          },
+        ],
       });
       con.next();
     }
