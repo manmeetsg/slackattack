@@ -106,7 +106,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
         ],
       };
       con.say(resultMessage);
-      con.next();
+      con.end();
     }
   };
 
