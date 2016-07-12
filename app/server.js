@@ -37,30 +37,36 @@ controller.setupWebserver(process.env.PORT || 3001, (err, webserver) => {
 
 // Wake up message
 controller.on('outgoing_webhook', (bot, message) => {
-  bot.replyPublic(message, 'Hey! I\'m up! I\'m up! http://gifrific.com/wp-content/uploads/2012/10/Bunny-running-around-on-bed.gif');
+  bot.replyPublic(message, 'Hey! I\'m up! I\'m up! http://tinyurl.com/h4uf5qz');
 });
 
 
 // Handle all other messages
-controller.hears(['^((?!help|food|whats up).)*$'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+controller.hears(['^((?!help|food|whats up|hello|hi|howdy|hey).)*$'],
+['direct_message', 'direct_mention', 'mention'], (bot, message) => {
   // Use ask and callback to code in simple conversation
-  bot.reply(message, 'I have no idea what that means. Use \'help\' to see what I do!');
+  bot.reply(message, 'What does that mean? Use \'help\' to see what I do!');
 });
 
 // Handle the whats up? message
-controller.hears(['whats up'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+controller.hears(['whats up'], ['direct_message', 'direct_mention', 'mention'],
+(bot, message) => {
   // Use ask and callback to code in simple conversation
   bot.reply(message, 'Oh, ya know, just robot things.');
 });
 
 // Handle the help message
-controller.hears(['help'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+controller.hears(['help'], ['direct_message', 'direct_mention', 'mention'],
+(bot, message) => {
   // Use ask and callback to code in simple conversation
-  bot.reply(message, 'You can say hi to me, ask me for food by using the word food, or ask me \'whats up?\'');
+  bot.reply(message,
+  'You can greet me, ask me for \'food\', or ask me \'whats up?\'');
 });
 
 // Hello response given by Tim T
-controller.hears(['hello', 'hi', 'howdy', 'hey'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+controller.hears(['^hello', '^hi', '^howdy', '^hey'],
+['direct_message', 'direct_mention', 'mention'],
+(bot, message) => {
   bot.api.users.info({ user: message.user }, (err, res) => {
     if (res) {
       bot.reply(message, `Hello, ${res.user.name}!`);
@@ -77,7 +83,8 @@ I DISCUSSED THIS PORTION OF THE CODE WITH ALEX BEALS AS HE IS QUITE EXPERIENCED
 WITH JAVASCRIPT AND CALLBACKS AND I HAVE NEVER USED IT BEFORE
 IF THE STRUCTURE IS SIMILAR, THIS IS WHY
 */
-controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
+(bot, message) => {
   // call backs for the food search
   const pullResult = (res, con, resultList) => {
     if (resultList.length <= 0) {
