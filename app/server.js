@@ -131,7 +131,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
   // Now ask for location
   const locationQuery = (res, con) => {
     con.ask('Where are you located?', (response, convo) => {
-      con.say('Great!');
+      convo.say('Great!');
       foodQuery(response, convo, response.text);
       convo.next();
     });
