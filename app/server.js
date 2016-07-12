@@ -126,6 +126,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
   const foodQuery = (res, con, loc) => {
     con.ask('What would you like to eat?', (response, convo) => {
       // Yelp search for results here
+      convo.next();
       yelpQuery(response, convo, response.text, loc);
       convo.next();
     });
@@ -135,6 +136,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
   const locationQuery = (res, con) => {
     con.ask('Where are you located?', (response, convo) => {
       convo.say('Great!');
+      convo.next();
       foodQuery(response, convo, response.text);
       convo.next();
     });
@@ -148,6 +150,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
         pattern: bot.utterances.yes,
         callback: (response, convo) => {
           convo.say('Ok, here we go!');
+          convo.next();
           locationQuery(response, convo);
           convo.next();
         },
