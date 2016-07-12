@@ -92,7 +92,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
       con.next();
       return;
     }
-    con.reply({
+    con.say({
       attachments: [
         {
           title: `${resultList[0].name}`,
