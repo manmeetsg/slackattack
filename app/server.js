@@ -22,9 +22,9 @@ const slackbot = controller.spawn({
 // Include the yelp API
 const yelpControl = new Yelp({
   consumer_key: 'oI0IJ6CHB8XqZ15klhYacA',
-  consumer_secret: process.env.consumer_secret,
+  consumer_secret: 'WEleJgUR7P5LhPbWHRFb9Bb8DXM', // process.env.consumer_secret,
   token: 'KVDbQ7JdE97FCIgevYp_gYuJt7MUhoPv',
-  token_secret: process.env.token_secret,
+  token_secret: '8zAqYuVckws4oBujGmbXKfiBT5s', //process.env.token_secret,
 });
 
 // prepare webhook
@@ -92,6 +92,8 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
       con.next();
       return;
     }
+    console.log('hi');
+    // con.say(' NORMAL TEXT HERE HOMIE');
     con.say({
       attachments: [
         {
@@ -110,7 +112,9 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
     yelpControl.search({ term: food, location: loc, sort: 2 })
     .then(data => {
       // Return the top business or handle more commands to get the next result
+      console.log(data.businesses);
       pullResult(res, con, data.businesses);
+      con.next();
     })
     .catch(err => {
       con.say('Something went wrong there. Try again by saying \'food\'!');
