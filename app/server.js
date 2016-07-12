@@ -87,10 +87,12 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
 (bot, message) => {
   // call backs for the food search
   const pullResult = (res, con, resultList) => {
+    // if we have no results, there are no results!
     if (resultList.length <= 0) {
       con.say('Sorry, no results are available.');
       con.next();
     } else {
+      // We build a result message and send it using bot.reply
       con.next();
       const resultMessage = {
         text: `${resultList[0].name}'s Rating: ${resultList[0].rating}`,
@@ -110,7 +112,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
     }
   };
 
-  // Actually search yelp
+  // Actually search yelp in this function call back
   const yelpQuery = (res, con, food, loc) => {
     // Search yelp with the search items and a sort by highest rated (2)
     yelpControl.search({ term: food, location: loc, sort: 2 })
