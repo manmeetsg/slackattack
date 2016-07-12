@@ -103,6 +103,8 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
           },
         ],
       };
+      /* con.say is documented to be buggy with attachments so I had to use
+      bot.reply instead */
       bot.reply(message, resultMessage);
       con.next();
     }
