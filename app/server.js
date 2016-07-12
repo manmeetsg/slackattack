@@ -92,8 +92,6 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
       con.next();
       return;
     }
-    console.log('hi');
-    // con.say(' NORMAL TEXT HERE HOMIE');
     con.say({
       attachments: [
         {
@@ -112,7 +110,6 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
     yelpControl.search({ term: food, location: loc, sort: 2 })
     .then(data => {
       // Return the top business or handle more commands to get the next result
-      console.log(data.businesses);
       pullResult(res, con, data.businesses);
       con.next();
     })
@@ -136,7 +133,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
     con.ask('Where are you located?', (response, convo) => {
       con.say('Great!');
       foodQuery(response, convo, response.text);
-      con.next();
+      convo.next();
     });
   };
 
