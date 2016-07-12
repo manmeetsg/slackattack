@@ -110,6 +110,10 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
     .then(data => {
       // Return the top business or handle more commands to get the next result
       pullResult(res, con, data.businesses);
+    })
+    .catch(err => {
+      con.say('Something went wrong there. Try again by saying \'food\'!');
+      con.next();
     });
   };
 
