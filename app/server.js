@@ -94,6 +94,7 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
     }
     con.next();
     con.say('Here is your top result: ');
+    con.next();
     con.say({
       attachments: [
         {
