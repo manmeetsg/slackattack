@@ -44,7 +44,7 @@ controller.on('outgoing_webhook', (bot, message) => {
 // Handle all other messages
 controller.hears(['^((?!help|food|whats up).)*$'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
   // Use ask and callback to code in simple conversation
-  bot.reply(message, 'Oh, ya know, just robot things.');
+  bot.reply(message, 'I have no idea what that means. Use \'help\' to see what I do!');
 });
 
 // Handle the whats up? message
