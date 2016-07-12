@@ -92,8 +92,6 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
       con.next();
     } else {
       con.next();
-      con.say('Here is your top result: ');
-      con.next();
       const resultMessage = {
         text: `${resultList[0].name}'s Rating: ${resultList[0].rating}`,
         attachments: [
