@@ -22,9 +22,9 @@ const slackbot = controller.spawn({
 // Include the yelp API
 const yelpControl = new Yelp({
   consumer_key: 'oI0IJ6CHB8XqZ15klhYacA',
-  consumer_secret: 'WEleJgUR7P5LhPbWHRFb9Bb8DXM', // process.env.consumer_secret,
+  consumer_secret: process.env.consumer_secret,
   token: 'KVDbQ7JdE97FCIgevYp_gYuJt7MUhoPv',
-  token_secret: '8zAqYuVckws4oBujGmbXKfiBT5s', //process.env.token_secret,
+  token_secret: process.env.token_secret,
 });
 
 // prepare webhook
