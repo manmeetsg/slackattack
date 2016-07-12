@@ -90,29 +90,31 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
     if (resultList.length <= 0) {
       con.say('Sorry, no results are available.');
       con.next();
-      return;
+    } else {
+      con.next();
+      con.say('Here is your top result: ');
+      con.next();
+      con.say({
+        attachments: [
+          {
+            title: `${resultList[0].name}`,
+            image_url: resultList[0].image_url,
+            text: resultList[0].snippet_text,
+          },
+        ],
+        text: `${resultList[0].name}'s Rating: ${resultList[0].rating}`,
+      });
+      con.next();
     }
-    con.next();
-    con.say('Here is your top result: ');
-    con.next();
-    con.say({
-      attachments: [
-        {
-          title: `${resultList[0].name}`,
-          image_url: resultList[0].image_url,
-          text: resultList[0].snippet_text,
-        },
-      ],
-      text: `${resultList[0].name}'s Rating: ${resultList[0].rating}`,
-    });
-    con.next();
   };
 
+  // Actually search yelp
   const yelpQuery = (res, con, food, loc) => {
     // Search yelp with the search items and a sort by highest rated (2)
     yelpControl.search({ term: food, location: loc, sort: 2 })
     .then(data => {
       // Return the top business or handle more commands to get the next result
+      con.next();
       pullResult(res, con, data.businesses);
       con.next();
     })
@@ -164,6 +166,6 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
       }]);
   };
 
-  // Call the functions we need
+  // Call the functions we need and start a conversation
   bot.startConversation(message, initialQuery);
 });
