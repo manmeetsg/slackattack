@@ -121,8 +121,8 @@ controller.hears(['food'], ['direct_message', 'direct_mention', 'mention'],
   const foodQuery = (res, con, loc) => {
     con.ask('What would you like to eat?', (response, convo) => {
       // Yelp search for results here
-      con.next();
       yelpQuery(response, convo, response.text, loc);
+      convo.next();
     });
   };
 
